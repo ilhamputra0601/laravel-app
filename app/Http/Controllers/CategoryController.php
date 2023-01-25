@@ -13,17 +13,19 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function categories()
+    public function index()
     {
         return view('layouts.categories',[
             'title' => 'Post Categories',
+            'active' =>"categories",
             'categories'=> Category::all(),
         ]);
     }
-    public function category(Category $category)
+    public function show (Category $category)
     {
-        return view('layouts.category',[
-            'title' => $category->name,
+        return view('layouts.blog',[
+            'title' =>"Post by Category : $category->name",
+            'active' =>"blog",
             'posts' => $category->posts,
             'category'=> $category->name,
         ]);
@@ -46,17 +48,6 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategoryRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
     {
         //
     }

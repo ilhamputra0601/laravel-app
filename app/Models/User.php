@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    protected $load = ['author','category'];
 
     /**
      * The attributes that should be hidden for serialization.

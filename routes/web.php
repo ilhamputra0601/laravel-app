@@ -23,9 +23,11 @@ Route::get('/blog',[PostController::class,'blog']);
 
 Route::get('/blog/{post:slug}',[PostController::class,'article']);
 
-Route::get('/categories',[CategoryController::class,'categories']);
+// Route::get('/categories',[CategoryController::class,'categories']);
 
-Route::get('/categories/{category:slug}',[CategoryController::class,'category']);
+Route::get('/categories',[CategoryController::class,'index']);
 
-Route::get('/authors/{author:username}',[UserController::class,'author']);
+Route::get('/categories/{category:slug}',[CategoryController::class,'show']);
+
+Route::get('/author/{author:username}',[UserController::class,'author']);
 

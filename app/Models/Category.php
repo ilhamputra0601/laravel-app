@@ -9,6 +9,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded=['id'];
+    protected $load = ['author','category'];
 
     public function posts()
     {

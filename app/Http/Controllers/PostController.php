@@ -15,12 +15,14 @@ class PostController extends Controller
     {
         return view('layouts.home',[
             "title" => "Home",
+            "active" => "home",
         ]);
     }
     public function about()
     {
         return view('layouts.about',[
             "title" => "About",
+            "active" => "about",
             "name" => "Ilham Ramadhan",
             "email" => "ilhamputra0601@gmail.com",
             "img" => "img\hamz.jpg",
@@ -29,15 +31,16 @@ class PostController extends Controller
     public function blog()
     {
         return view('layouts.blog',[
-            "title" => "Blog",
-            // "posts" => Post::all()
-            "posts" => Post::latest()->get()
+            "title" => "All Posts",
+            'active' =>"blog",
+            "posts" => Post::latest()->paginate(9)
         ]);
     }
     public function article(Post $post)
     {
         return view('layouts.article',[
             "title" => "Article",
+            'active' =>"blog",
             "post" => $post
         ]);
     }
