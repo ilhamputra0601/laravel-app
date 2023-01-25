@@ -19,15 +19,11 @@ Route::get('/',[PostController::class,'home']);
 
 Route::get('/about',[PostController::class,'about']);
 
-Route::get('/blog',[PostController::class,'blog']);
+Route::get('/blog',[PostController::class,'index']);
 
-Route::get('/blog/{post:slug}',[PostController::class,'article']);
+Route::get('/blog/{post:slug}',[PostController::class,'show']);
 
 // Route::get('/categories',[CategoryController::class,'categories']);
 
 Route::get('/categories',[CategoryController::class,'index']);
-
-Route::get('/categories/{category:slug}',[CategoryController::class,'show']);
-
-Route::get('/author/{author:username}',[UserController::class,'author']);
 

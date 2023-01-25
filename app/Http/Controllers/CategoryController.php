@@ -23,12 +23,7 @@ class CategoryController extends Controller
     }
     public function show (Category $category)
     {
-        return view('layouts.blog',[
-            'title' =>"Post by Category : $category->name",
-            'active' =>"blog",
-            'posts' => $category->posts,
-            'category'=> $category->name,
-        ]);
+       //
     }
 
     /**
