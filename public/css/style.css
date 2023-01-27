@@ -529,3 +529,29 @@ button {
     margin-top: 20px;
   }
 }
+
+/* login style */
+element.style {
+}
+
+
+.m-auto {
+    margin: auto!important;
+}
+.w-100 {
+    width: 100%!important;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+main {
+    display: block;
+}
+.text-center {
+    text-align: center!important;
+}
+
+.form-registration input {
+    border-radius:0;
+}
