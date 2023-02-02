@@ -1,64 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
-class PostController extends Controller
+class DashboardPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
-    {
-        return view('layouts.home',[
-            "title" => "Home",
-        ]);
-    }
-    public function about()
-    {
-        return view('layouts.about',[
-            "title" => "About",
-            "name" => "Ilham Ramadhan",
-            "email" => "ilhamputra0601@gmail.com",
-            "img" => "img\hamz.jpg",
-        ]);
-    }
-
     public function index()
     {
-        // testter req search
-        // dd(request('search'));
-        $title='';
 
-        if (request('category')) {
-            $category = Category::firstWhere('slug',request('category'));
-            $title =' in ' . $category->name;
-        }
-
-        if (request('author')) {
-            $author = User::firstWhere('username',request('author'));
-            $title =' by ' . $author->name;
-        }
-        return view('layouts.blog',[
-            "title" => "All Posts". $title,
-            "posts" =>Post::latest()->filter(request(['search','category','author']))->paginate(10)->withQueryString()
+        return view ('dashboard.posts.index',[
+            'posts' => Post::where('user_id', auth()->user()->id)->get()
         ]);
     }
-    public function show(Post $post)
-    {
-        return view('layouts.article',[
-            "title" => "Article",
-            "post" => $post
-        ]);
-    }
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -67,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view ('dashboard.posts.create',[
+            'Categories' => Category::all()
+        ]);
     }
 
     /**
@@ -78,7 +42,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post)
+    {
+        return view('dashboard.posts.show',[
+            'post' => $post
+        ]);
     }
 
     /**
@@ -113,5 +90,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title );
+       return response()->json(['slug'=> $slug]);
     }
 }
