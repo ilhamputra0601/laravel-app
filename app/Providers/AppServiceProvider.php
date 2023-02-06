@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        // cara yang lebih flexsible menyisipkan table boolean database
+        // make migratioan add_admin_to_users_table tanpa membuat table baru hanya existing tabel user no yes users
+        Gate::define('admin', function(User $user) {
+            return $user->role;
+        });
     }
 }
