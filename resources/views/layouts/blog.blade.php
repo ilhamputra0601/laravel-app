@@ -22,9 +22,18 @@
 @if ($posts->count())
 
 <div class="card mb-3">
-    <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
-        style="cursor: pointer; alt=" {{ $posts[0]->author->username }} " onclick="
-        location.href='/blog/{{ $posts[0]->slug }}'"'>
+    @if ($posts[0]->image)
+         <div style="max-height: 400px; overflow:hidden; ">
+             <img src="{{ asset('storage/'. $posts[0]->image) }}" class="img-fluid"
+             style="cursor: pointer; alt=" {{ $posts[0]->author->username }} " onclick="
+             location.href='/blog/{{ $posts[0]->slug }}'">
+         </div>
+         @else
+         <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
+         style="cursor: pointer; alt=" {{ $posts[0]->author->username }} " onclick="
+         location.href='/blog/{{ $posts[0]->slug }}'">
+         @endif
+
     <div class=" card-body text-center">
     <h5 class="card-title">{{ $posts[0]->title }}</h5>
     <p>
@@ -46,9 +55,17 @@
                 <div class="position-absolute mt-2 px-3 py-2 text-white" style="background-color: rgba(0, 0, 0, 0.7); cursor:pointer; " onclick="location.href='/blog?category={{ $post->category->slug }}'">
                     {{ $post->category->name }}
                 </div>
+                @if ($post->image)
+
+                <img src="{{ asset('storage/'. $post->image)  }}" class="card-img-top"
+                    style="cursor: pointer;" alt="{{ $post->author->name }}"
+                    onclick="location.href='/blog/{{ $post->slug }}'">
+                @else
+
                 <img src="https://source.unsplash.com/600x400?{{ $post->category->name }}" class="card-img-top"
                     style="cursor: pointer;" alt="{{ $post->author->name }}"
                     onclick="location.href='/blog/{{ $post->slug }}'">
+                @endif
                 <div class="card-body">
                     <h5 class="card-title" style="cursor: pointer;" onclick="location.href='/blog/{{ $post->slug }}'">
                         {{ $post->title }}</h5>
