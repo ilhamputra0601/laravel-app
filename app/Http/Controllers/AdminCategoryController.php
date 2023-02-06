@@ -21,7 +21,7 @@ class AdminCategoryController extends Controller
         // }
         // massuk ke app service provider untuk nambah gates
 
-        // untuk cek gates nnti coba untuk apus admin.php
+        // untuk cek gates nnti coba untuk apus admin.php 
         // $this->authorize('admin');
 
         return view('dashboard.categories.index',[
