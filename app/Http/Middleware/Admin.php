@@ -22,6 +22,7 @@ class Admin
         //     abort(403);
         // }
         // w/database
+        // tambahkan kelas admin di kernel.php untuk menangani route
         if(!auth()->check() || !auth()->user()->role) {
             abort(403);
         }
